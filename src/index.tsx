@@ -1,6 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-const HelloWorld: React.FC = () => (<h1>Cromwell Pipeline</h1>);
+import styled from "./utils/styled";
 
-ReactDOM.render(<HelloWorld/>, document.getElementById('root'));
+const HelloWorld = styled('h1')`
+  color: royalblue;
+`;
+
+ReactDOM.render(<HelloWorld>Cromwell Pipeline</HelloWorld>, document.getElementById('root'));
