@@ -1,5 +1,5 @@
 interface Window {
-    initialReduxState: any
+    __INITIAL_STATE__: any
 }
 
 declare module '*.svg'

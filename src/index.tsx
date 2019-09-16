@@ -1,10 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { createBrowserHistory } from 'history';
 
-import styled from "./utils/styled";
+import Main from './main';
+import configureStore from './configureStore';
 
-const HelloWorld = styled('h1')`
-  color: royalblue;
-`;
+const history = createBrowserHistory();
+const store = configureStore(history, window.__INITIAL_STATE__);
 
-ReactDOM.render(<HelloWorld>Cromwell Pipeline</HelloWorld>, document.getElementById('root'));
+ReactDOM.render(<Main store={store} history={history}/>, document.getElementById('root'));
