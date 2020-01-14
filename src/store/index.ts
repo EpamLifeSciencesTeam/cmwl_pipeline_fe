@@ -4,14 +4,14 @@ import { connectRouter, RouterState } from 'connected-react-router';
 import { History } from 'history';
 
 export interface ApplicationState {
-  router: RouterState
+  router: Readonly<RouterState>
 }
 
 export interface ConnectedReduxProps<A extends Action = AnyAction> {
-  dispatch: Dispatch<A>
+  dispatch: Readonly<Dispatch<A>>
 }
 
-export const createRootReducer = (history: History) => combineReducers({
+export const createRootReducer = (history: History) => combineReducers<ApplicationState>({
   router: connectRouter(history)
 });
 
