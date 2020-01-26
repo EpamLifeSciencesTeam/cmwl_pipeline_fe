@@ -1,11 +1,15 @@
 {
   "name": "cromwell-pipeline-ui",
   "version": "0.1.0",
+  "description": "Cromwell Pipeline UI",
+  "keywords": [],
   "private": true,
+  "sideEffects": false,
   "scripts": {
-    "start": "webpack-dev-server --mode development --hot --progress --color --port 8080 --open",
-    "build": "webpack --mode production --config webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config .webpack/production.config.ts",
+    "start": "webpack-dev-server --config .webpack/development.config.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "a": "webpack --help"
   },
   "browserslist": {
     "development": [
@@ -21,25 +25,17 @@
     ]
   },
   "dependencies": {
+    "@material-ui/core": "^4.8.3",
     "connected-react-router": "^6.6.1",
-    "dotenv-expand": "^4.2.0",
-    "emotion": "^9.2.12",
-    "emotion-theming": "^9.2.9",
     "history": "^4.10.1",
-    "http2": "^3.3.7",
     "moment": "^2.22.2",
-    "polished": "^2.3.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-emotion": "^9.2.12",
     "react-redux": "^6.0.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.5",
     "redux-saga": "^0.16.2",
-    "typeface-ibm-plex-mono": "^0.0.61",
-    "typeface-ibm-plex-sans": "^0.0.61",
     "typesafe-actions": "^2.0.4"
   },
   "devDependencies": {
@@ -47,22 +43,32 @@
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@types/history": "^4.7.3",
+    "@types/html-webpack-plugin": "^3.2.1",
     "@types/node": "^10.17.13",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@types/react-redux": "^7.1.5",
     "@types/react-router-dom": "^4.3.5",
+    "@types/uglifyjs-webpack-plugin": "^1.1.0",
+    "@types/webpack": "^4.41.3",
     "@types/webpack-dev-server": "^3.9.0",
+    "@types/webpack-merge": "^4.1.5",
     "babel-plugin-emotion": "^9.2.11",
+    "clean-webpack-plugin": "^3.0.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "prettier": "^1.19.1",
+    "redux-devtools-extension": "^2.13.5",
     "ts-loader": "^6.2.1",
+    "ts-node": "^8.6.2",
     "tslint": "^5.20.1",
     "tslint-config-blvd": "^1.2.1",
-    "typescript": "^3.7.4",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.5",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^3.10.1",
+    "webpack-merge": "^4.2.2"
   }
 }

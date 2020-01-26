@@ -4,8 +4,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Store } from 'redux';
 import { History } from 'history';
 
-import Routes from './routes';
-import { ApplicationState } from './store';
+import Routes               from '@pipeline/routes';
+import { ApplicationState } from '@pipeline/store';
 
 interface MainProps {
   store: Store<ApplicationState>

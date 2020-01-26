@@ -4,7 +4,7 @@ import { routerMiddleware } from 'connected-react-router';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { History } from 'history';
 
-import { ApplicationState, createRootReducer, rootSaga } from './store';
+import { ApplicationState, createRootReducer, rootSaga } from '@pipeline/store';
 
 export default function configureStore(history: History, initialState: ApplicationState): Store<ApplicationState> {
   const composeEnhancers = composeWithDevTools({});

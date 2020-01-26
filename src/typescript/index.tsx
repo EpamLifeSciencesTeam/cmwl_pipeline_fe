@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 
-import Main from './main';
-import configureStore from './configureStore';
+import Main           from '@pipeline/main';
+import configureStore from '@pipeline/configureStore';
 
 const history = createBrowserHistory();
 const store = configureStore(history, window.__INITIAL_STATE__);
