@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler } from 'react';
 import classes from './Input.module.css';
 
-export type InputProps = {
+interface InputProps {
   type: string
   placeholder: string
   value: string
@@ -9,7 +9,7 @@ export type InputProps = {
 }
 
 // ToDo: create validation result representation (with appropriate style)
-const input = (props: InputProps) => {
+export const Input = (props: InputProps) => {
   return (
     <input
       className={classes.Input}
@@ -19,5 +19,3 @@ const input = (props: InputProps) => {
       onChange={props.onChange} />
   );
 };
-
-export default input;

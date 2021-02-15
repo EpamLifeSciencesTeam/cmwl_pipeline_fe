@@ -26,5 +26,7 @@ interface AuthLogOutAction {
   type: typeof AUTH_LOG_OUT
 }
 
-export type AuthActionTypes = AuthLogInSuccessAction | AuthLogInFailureAction |
-  AuthLogOutAction
+export type AuthActionTypes =
+  | AuthLogInSuccessAction
+  | AuthLogInFailureAction
+  | AuthLogOutAction
