@@ -13,12 +13,12 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 // ToDo: Add spinner
 // ToDo: Add Error handling
-// ToDo: Add Mock Auth (for local purposes)
+// ToDo: Add Mock SignIn (for local purposes)
 // ToDo: Use the local store for keeping auth info
 // ToDo: Improve performance via component's life-cycles (render them only when it's needed)
-// ToDo: Make a presentable style
 // ToDo: Add fp-ts to use functional approach for development
 // ToDo: Add tests
+// ToDo: Add i18n
 
 const app = (
   <Provider store={store}>
