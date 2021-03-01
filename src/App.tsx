@@ -1,14 +1,15 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import SignIn from './containers/Auth/SignIn/SignIn';
 import { Redirect, Route, Switch } from 'react-router';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import { Dashboard } from './containers/Dashboard/Dashboard';
-import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
-import clsx from 'clsx';
+import { Box, Container, Grid, makeStyles, Paper, Theme } from '@material-ui/core';
+import classNames from 'classnames';
+import { LocaleContext, LocaleLanguage } from './context/LocaleContext';
 
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme: Theme) => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -23,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     display: 'flex',
     overflow: 'auto',
-    flexDirection: 'column'
+    justifyContent: 'center'
   },
   fixedHeight: {
     height: '85vh'
@@ -32,14 +33,19 @@ export const useStyles = makeStyles((theme) => ({
 
 const App: FunctionComponent = () => {
 
+  const [locale, setLocale] = useState(LocaleLanguage.en);
+
   const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const fixedHeightPaper = classNames({
+    [classes.paper]: true,
+    [classes.fixedHeight]: true
+  });
   const isAuthenticated = useSelector<RootState, boolean>(state => state.auth.isAuthenticated);
 
   const content = () => {
     if (isAuthenticated) {
       return (
-        <>
+        <LocaleContext.Provider value={{ locale, setLocale }}>
           <Dashboard>
             {/* Just for now, Dashboard's content is a PoC and this implementation will be removed in the nearest time */}
             <main className={classes.content}>
@@ -50,9 +56,9 @@ const App: FunctionComponent = () => {
                     <Paper className={fixedHeightPaper}>
                       <Switch>
                         {/*ToDo: rid off from the inline-renders */}
-                        <Route path='/projects' render={() => <h2>Projects content</h2>} />
-                        <Route path='/executions' render={() => <h2>Executions content</h2>} />
-                        <Route path='/' exact render={() => <h2>Main content</h2>} />
+                        <Route path='/projects' render={() => <h2>Projects content ({locale})</h2>} />
+                        <Route path='/executions' render={() => <h2>Executions content ({locale})</h2>} />
+                        <Route path='/' exact render={() => <h2>Main content ({locale})</h2>} />
                       </Switch>
                     </Paper>
                   </Grid>
@@ -61,7 +67,7 @@ const App: FunctionComponent = () => {
             </main>
           </Dashboard>
           <Redirect to='/' />
-        </>
+        </LocaleContext.Provider>
       );
     }
     return (

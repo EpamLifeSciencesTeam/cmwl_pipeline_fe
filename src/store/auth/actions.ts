@@ -8,7 +8,6 @@ const logInSuccess = (): AuthActionTypes => {
 };
 
 export const logIn = (logInData: LogInData): CmwlThunkAction => {
-  console.log(logInData);
   return dispatch => {
     dispatch(logInSuccess());
     // ToDo: Add axios async call

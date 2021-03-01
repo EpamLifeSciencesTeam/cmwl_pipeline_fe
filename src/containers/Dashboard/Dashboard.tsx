@@ -14,7 +14,6 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import LoopIcon from '@material-ui/icons/Loop';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import clsx from 'clsx';
 import { FC, useState } from 'react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -27,11 +26,14 @@ import {
 } from '../../shared/Constants';
 import { CmwlTypographyLink } from '../../components/UI/CmwlTypographyLink';
 import { useDashboardStyles } from './DashboardStyles';
+import classNames from 'classnames';
+import { LocaleSwitcher } from '../../components/UI/LocaleSwitcher/LocaleSwitcher';
 
 export const Dashboard: FC = props => {
   const dispatch = useDispatch();
   const classes = useDashboardStyles();
   const [open, setOpen] = useState(false);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -46,14 +48,20 @@ export const Dashboard: FC = props => {
   return (
     <Box className={classes.root}>
       <CssBaseline />
-      <AppBar position='absolute' className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar position='absolute' className={classNames({
+        [classes.appBar]: true,
+        [classes.appBarShift]: open
+      })}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge='start'
             color='inherit'
             aria-label='open drawer'
             onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}>
+            className={classNames({
+              [classes.menuButton]: true,
+              [classes.menuButtonHidden]: open
+            })}>
             <MenuIcon />
           </IconButton>
           <CmwlTypographyLink
@@ -64,6 +72,7 @@ export const Dashboard: FC = props => {
             to='/'>
             {DASHBOARD_CMWL_TITLE}
           </CmwlTypographyLink>
+          <LocaleSwitcher />
           <IconButton color='inherit' onClick={logOutHandler}>
             <ExitToAppIcon />
           </IconButton>
@@ -71,7 +80,12 @@ export const Dashboard: FC = props => {
       </AppBar>
       <Drawer
         variant='permanent'
-        classes={{ paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose) }}
+        classes={{
+          paper: classNames({
+            [classes.drawerPaper]: true,
+            [classes.drawerPaperClose]: !open
+          })
+        }}
         open={open}>
         <Box className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>

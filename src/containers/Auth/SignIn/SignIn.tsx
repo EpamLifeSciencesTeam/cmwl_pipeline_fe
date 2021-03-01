@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, FC, useState } from 'react';
 import { CmwlButton } from '../../../components/UI/AppButton/CmwlButton';
-import { CmwInput } from '../../../components/UI/CmwInput';
+import { CmwlInput } from '../../../components/UI/CmwlInput';
 import { logIn } from '../../../store/auth/actions';
 import { useDispatch } from 'react-redux';
 import { CmwlThunkDispatch } from '../../../store';
@@ -29,7 +29,7 @@ const SignIn: FC = () => {
     }
   });
 
-  const inputChangedHandler = (event: ChangeEvent<HTMLInputElement>, id: string) => {
+  const inputChangedHandler = (id: string) => (event: ChangeEvent<HTMLInputElement>) => {
     const updatedLoginForm = {
       ...getState.loginForm,
       [id]: event.target.value
@@ -61,16 +61,16 @@ const SignIn: FC = () => {
           Sign in
         </Typography>
         <form className={classes.form} onSubmit={logInHandler}>
-          <CmwInput
+          <CmwlInput
             type='text'
             label={AUTH_EMAIL_LABEL}
             value={getState.loginForm.email}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => inputChangedHandler(event, 'email')} />
-          <CmwInput
+            onChange={inputChangedHandler('email')} />
+          <CmwlInput
             type='password'
             label={AUTH_PASSWORD_LABEL}
             value={getState.loginForm.password}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => inputChangedHandler(event, 'password')} />
+            onChange={inputChangedHandler('password')} />
           <CmwlButton type='submit'>{AUTH_SIGN_IN_TEXT}</CmwlButton>
         </form>
         <Copyright />

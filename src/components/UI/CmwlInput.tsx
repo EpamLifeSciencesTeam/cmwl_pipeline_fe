@@ -10,19 +10,14 @@ interface AppInputProps {
   onChange?: ChangeEventHandler
 }
 
-export const CmwInput: FC<AppInputProps> = props => {
+export const CmwlInput: FC<AppInputProps> = props => {
   return (
     <TextField
-      id={props.id}
-      type={props.type}
-      name={props.name}
-      label={props.label}
-      value={props.value}
-      onChange={props.onChange}
       variant="outlined"
       margin="normal"
-      required
-      fullWidth
+      required={true}
+      fullWidth={true}
+      {...props}
     />
   );
 };

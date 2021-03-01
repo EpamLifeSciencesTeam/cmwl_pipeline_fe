@@ -29,6 +29,6 @@ export const CmwlTypographyLink: FC<TypographyLinkProps> = props => {
   );
 
   return (
-    <Typography component={memoLink}{...props} />
+    <Typography component={memoLink} {...props} />
   );
 };
