@@ -1,48 +1,87 @@
-import React, { FunctionComponent } from 'react';
-import Auth from './containers/AuthForm/Auth';
+import React, { FunctionComponent, useState } from 'react';
+import SignIn from './containers/Auth/SignIn/SignIn';
 import { Redirect, Route, Switch } from 'react-router';
-import { NavLink } from 'react-router-dom';
-import { Button } from './components/UI/Button/Button';
-import { logOut } from './store/auth/actions';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from './store';
+import { Dashboard } from './containers/Dashboard/Dashboard';
+import { Box, Container, Grid, makeStyles, Paper, Theme } from '@material-ui/core';
+import classNames from 'classnames';
+import { LocaleContext, LocaleLanguage } from './context/LocaleContext';
+
+
+export const useStyles = makeStyles((theme: Theme) => ({
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto'
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4)
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    justifyContent: 'center'
+  },
+  fixedHeight: {
+    height: '85vh'
+  }
+}));
 
 const App: FunctionComponent = () => {
 
-  const isAuthenticated = useSelector<RootState, boolean>(state => state.auth.isAuthenticated);
-  const dispatch = useDispatch();
+  const [locale, setLocale] = useState(LocaleLanguage.en);
 
-  const logOutHandler = () => {
-    dispatch(logOut());
-  };
+  const classes = useStyles();
+  const fixedHeightPaper = classNames({
+    [classes.paper]: true,
+    [classes.fixedHeight]: true
+  });
+  const isAuthenticated = useSelector<RootState, boolean>(state => state.auth.isAuthenticated);
 
   const content = () => {
-    // ToDo: Create a navigation component
     if (isAuthenticated) {
       return (
-        <>
-          {/*ToDo: rid off from the inline-style */}
-          <NavLink style={{ margin: '10px' }} to='/'>Home</NavLink>
-          <NavLink style={{ margin: '10px' }} to='/projects'>Projects</NavLink>
-          <Button onClick={logOutHandler}>Log out</Button>
+        <LocaleContext.Provider value={{ locale, setLocale }}>
+          <Dashboard>
+            {/* Just for now, Dashboard's content is a PoC and this implementation will be removed in the nearest time */}
+            <main className={classes.content}>
+              <Box className={classes.appBarSpacer} />
+              <Container maxWidth='xl' className={classes.container}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12}>
+                    <Paper className={fixedHeightPaper}>
+                      <Switch>
+                        {/*ToDo: rid off from the inline-renders */}
+                        <Route path='/projects' render={() => <h2>Projects content ({locale})</h2>} />
+                        <Route path='/executions' render={() => <h2>Executions content ({locale})</h2>} />
+                        <Route path='/' exact render={() => <h2>Main content ({locale})</h2>} />
+                      </Switch>
+                    </Paper>
+                  </Grid>
+                </Grid>
+              </Container>
+            </main>
+          </Dashboard>
           <Redirect to='/' />
-        </>
+        </LocaleContext.Provider>
       );
     }
-    return <Redirect to='/auth' />;
+    return (
+      <>
+        <Route path='/auth' component={SignIn} />
+        <Redirect to='/auth' />
+      </>
+    );
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1>Cromwell Pipeline</h1>
+    <Box style={{ textAlign: 'center' }}>
       {content()}
-      <Switch>
-        {/*ToDo: rid off from the inline-renders */}
-        <Route path='/auth' component={Auth} />
-        <Route path='/projects' render={() => <h2>Projects content</h2>} />
-        <Route path='/' exact render={() => <h2>Main content</h2>} />
-      </Switch>
-    </div>
+    </Box>
   );
 };
 

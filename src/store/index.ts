@@ -8,5 +8,5 @@ export const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>
 
-export type AppThunkAction<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AnyAction>
-export type AppThunkDispatch = ThunkDispatch<RootState, unknown, AnyAction>
+export type CmwlThunkAction<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AnyAction>
+export type CmwlThunkDispatch = ThunkDispatch<RootState, unknown, AnyAction>

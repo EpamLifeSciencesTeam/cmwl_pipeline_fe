@@ -1,5 +1,5 @@
 import { AUTH_LOG_IN_SUCCESS, AUTH_LOG_OUT, AuthActionTypes, LogInData } from './types';
-import { AppThunkAction } from '../index';
+import { CmwlThunkAction } from '../index';
 
 const logInSuccess = (): AuthActionTypes => {
   return {
@@ -7,8 +7,7 @@ const logInSuccess = (): AuthActionTypes => {
   };
 };
 
-export const logIn = (logInData: LogInData): AppThunkAction => {
-  console.log(logInData);
+export const logIn = (logInData: LogInData): CmwlThunkAction => {
   return dispatch => {
     dispatch(logInSuccess());
     // ToDo: Add axios async call
