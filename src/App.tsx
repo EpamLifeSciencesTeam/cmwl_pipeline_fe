@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import SignIn from './containers/Auth/SignIn/SignIn';
+import SignUp from './containers/Auth/SignUp/SignUp';
 import { Redirect, Route, Switch } from 'react-router';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
@@ -72,8 +73,9 @@ const App: FunctionComponent = () => {
     }
     return (
       <>
-        <Route path='/auth' component={SignIn} />
-        <Redirect to='/auth' />
+        <Route path='/sign-in' component={SignIn} />
+        <Route path='/sign-up' component={SignUp} />
+        <Redirect to='/sign-in' />
       </>
     );
   };

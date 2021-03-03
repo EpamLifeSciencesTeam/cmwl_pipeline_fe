@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 
-export const useSignInStyles = makeStyles((theme: Theme) => createStyles({
+export const useSignUpStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     height: '75vh'
   },
@@ -10,14 +10,17 @@ export const useSignInStyles = makeStyles((theme: Theme) => createStyles({
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(5),
-    width: '20vw'
+    width: '30vw'
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%',
-    marginTop: theme.spacing(1)
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
   }
 }));
