@@ -7,6 +7,7 @@ interface AppInputProps {
   name?: string
   label?: string
   value?: string
+  autoComplete?: string
   onChange?: ChangeEventHandler
 }
 

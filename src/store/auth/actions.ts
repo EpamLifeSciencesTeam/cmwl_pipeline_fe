@@ -1,21 +1,31 @@
-import { AUTH_LOG_IN_SUCCESS, AUTH_LOG_OUT, AuthActionTypes, LogInData } from './types';
+import {
+  AUTH_SIGN_IN_SUCCESS,
+  AUTH_SIGN_OUT,
+  AUTH_SIGN_UP_SUCCESS,
+  AuthActionTypes,
+  SignInData,
+  SignUpData
+} from './types';
 import { CmwlThunkAction } from '../index';
 
-const logInSuccess = (): AuthActionTypes => {
-  return {
-    type: AUTH_LOG_IN_SUCCESS
-  };
-};
+const signInSuccess = (): AuthActionTypes => ({
+  type: AUTH_SIGN_IN_SUCCESS
+});
 
-export const logIn = (logInData: LogInData): CmwlThunkAction => {
-  return dispatch => {
-    dispatch(logInSuccess());
-    // ToDo: Add axios async call
-  };
-}
+const signUpSuccess = (): AuthActionTypes => ({
+  type: AUTH_SIGN_UP_SUCCESS
+});
 
-export const logOut = (): AuthActionTypes => {
-  return {
-    type: AUTH_LOG_OUT
-  };
-};
+export const signIn = (signInData: SignInData): CmwlThunkAction => (dispatch => {
+  dispatch(signInSuccess());
+  // ToDo: Add axios async call
+});
+
+export const signUp = (signUpData: SignUpData): CmwlThunkAction => (dispatch => {
+  dispatch(signUpSuccess());
+  // ToDo: Add axios async call
+});
+
+export const signOut = (): AuthActionTypes => ({
+  type: AUTH_SIGN_OUT
+});

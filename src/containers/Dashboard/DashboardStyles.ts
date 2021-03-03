@@ -15,7 +15,7 @@ export const useDashboardStyles = makeStyles((theme: Theme) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      padding: '0 8px',
+      padding: theme.spacing(0, 1),
       ...theme.mixins.toolbar
     },
     appBar: {
@@ -34,7 +34,7 @@ export const useDashboardStyles = makeStyles((theme: Theme) => {
       })
     },
     menuButton: {
-      marginRight: 36
+      marginRight: theme.spacing(5)
     },
     menuButtonHidden: {
       display: 'none'

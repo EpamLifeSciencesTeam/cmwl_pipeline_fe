@@ -17,7 +17,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { FC, useState } from 'react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../../store/auth/actions';
+import { signOut } from '../../store/auth/actions';
 import { CmwlListItemLink } from '../../components/UI/CmwlListItemLink/CmwlListItemLink';
 import {
   DASHBOARD_CMWL_TITLE,
@@ -41,8 +41,8 @@ export const Dashboard: FC = props => {
     setOpen(false);
   };
 
-  const logOutHandler = () => {
-    dispatch(logOut());
+  const signOutHandler = () => {
+    dispatch(signOut());
   };
 
   return (
@@ -73,7 +73,7 @@ export const Dashboard: FC = props => {
             {DASHBOARD_CMWL_TITLE}
           </CmwlTypographyLink>
           <LocaleSwitcher />
-          <IconButton color='inherit' onClick={logOutHandler}>
+          <IconButton color='inherit' onClick={signOutHandler}>
             <ExitToAppIcon />
           </IconButton>
         </Toolbar>
