@@ -1,7 +1,11 @@
 import {
+  AUTH_AUTHENTICATE_USER,
+  AUTH_SESSION_EXPIRED,
   AUTH_SIGN_IN_FAILURE,
   AUTH_SIGN_IN_SUCCESS,
-  AUTH_SIGN_OUT, AUTH_SIGN_UP_FAILURE, AUTH_SIGN_UP_SUCCESS,
+  AUTH_SIGN_OUT,
+  AUTH_SIGN_UP_FAILURE,
+  AUTH_SIGN_UP_SUCCESS,
   AuthActionTypes,
   AuthState
 } from './types';
@@ -14,9 +18,8 @@ export const authReducer = (state = initialState, action: AuthActionTypes): Auth
   switch (action.type) {
     case AUTH_SIGN_IN_SUCCESS:
     case AUTH_SIGN_UP_SUCCESS:
-      // ToDo: Save AuthToken to the local store
-      // ToDo: Save RefreshToken to the local store
-      // ToDo: Save AuthTokenExpiration to the local store
+      localStorage.setItem('accessToken', action.authHeaders.accessToken);
+      localStorage.setItem('refreshToken', action.authHeaders.refreshToken);
       return {
         ...state,
         isAuthenticated: true
@@ -27,10 +30,15 @@ export const authReducer = (state = initialState, action: AuthActionTypes): Auth
     case AUTH_SIGN_UP_FAILURE:
       console.log('AUTH_SIGN_UP_FAILURE');
       return state;
+    case AUTH_AUTHENTICATE_USER:
+      return {
+        ...state,
+        isAuthenticated: true
+      };
     case AUTH_SIGN_OUT:
-      // ToDo: Remove AuthToken from the local store
-      // ToDo: Remove RefreshToken from the local store
-      // ToDo: Remove AuthTokenExpiration from the local store
+    case AUTH_SESSION_EXPIRED: // ToDo: Handle session expiration with specific user notification
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
       return {
         ...state,
         isAuthenticated: false

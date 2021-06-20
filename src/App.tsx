@@ -1,13 +1,14 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import SignIn from './containers/Auth/SignIn/SignIn';
 import SignUp from './containers/Auth/SignUp/SignUp';
 import { Redirect, Route, Switch } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store';
 import { Dashboard } from './containers/Dashboard/Dashboard';
 import { Box, Container, Grid, makeStyles, Paper, Theme } from '@material-ui/core';
 import classNames from 'classnames';
 import { LocaleContext, LocaleLanguage } from './context/LocaleContext';
+import { authenticateUser } from "./store/auth/actions";
 
 
 export const useStyles = makeStyles((theme: Theme) => ({
@@ -32,7 +33,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const App: FunctionComponent = () => {
+const App: FC = () => {
 
   const [locale, setLocale] = useState(LocaleLanguage.en);
 
@@ -42,6 +43,13 @@ const App: FunctionComponent = () => {
     [classes.fixedHeight]: true
   });
   const isAuthenticated = useSelector<RootState, boolean>(state => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isAuthenticated && localStorage.getItem('accessToken')) {
+      dispatch(authenticateUser);
+    }
+  });
 
   const content = () => {
     if (isAuthenticated) {
