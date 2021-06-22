@@ -42,7 +42,7 @@ export const Dashboard: FC = props => {
   };
 
   const signOutHandler = () => {
-    dispatch(signOut());
+    dispatch(signOut);
   };
 
   return (
